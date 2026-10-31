@@ -94,7 +94,8 @@ export const ChatPage: React.FC<ChatPageProps> = ({ initialQuery, onClearInitial
       const langMap: { [key: string]: string } = {
         en: 'en-IN',
         hi: 'hi-IN',
-        pa: 'pa-IN'
+        pa: 'pa-IN',
+        bho: 'bho-IN'
       };
       recognition.lang = langMap[language] || 'en-IN';
 
@@ -255,7 +256,7 @@ export const ChatPage: React.FC<ChatPageProps> = ({ initialQuery, onClearInitial
       .slice(0, 500);
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = language === 'hi' ? 'hi-IN' : language === 'pa' ? 'pa-IN' : 'en-IN';
+    utterance.lang = language === 'hi' ? 'hi-IN' : language === 'pa' ? 'pa-IN' : language === 'bho' ? 'hi-IN' : 'en-IN';
     utterance.rate = 1.0;
     utterance.onend = () => setCurrentlySpeakingIndex(null);
     utterance.onerror = () => setCurrentlySpeakingIndex(null);

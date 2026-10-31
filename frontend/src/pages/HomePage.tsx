@@ -27,42 +27,48 @@ export const HomePage: React.FC<HomePageProps> = ({ onStartChatWithQuery, setCur
   const sampleQueries = [
     {
       category: 'Tele-Law Scheme',
-      text: language === 'hi' ? 'टेली-लॉ के जरिए मुफ्त वकील से सलाह कैसे लें?' :
+      text: language === 'bho' ? 'टेली-लॉ के जरिए मुफ्त में वकील से सलाह कइसे लिहल जाई?' :
+            language === 'hi' ? 'टेली-लॉ के जरिए मुफ्त वकील से सलाह कैसे लें?' :
             language === 'pa' ? 'ਟੈਲੀ-ਲਾਅ ਰਾਹੀਂ ਮੁਫ਼ਤ ਵਕੀਲ ਦੀ ਸਲਾਹ ਕਿਵੇਂ ਲਈਏ?' :
             'How can I get free legal advice through Tele-Law?',
       badge: 'Legal Aid'
     },
     {
       category: 'eCourts Services',
-      text: language === 'hi' ? '16 अंकों के सीएनआर (CNR) नंबर से केस स्टेटस कैसे चेक करें?' :
+      text: language === 'bho' ? '16 अंक के सीएनआर (CNR) नंबर से केस के स्टेटस कइसे देखल जाई?' :
+            language === 'hi' ? '16 अंकों के सीएनआर (CNR) नंबर से केस स्टेटस कैसे चेक करें?' :
             language === 'pa' ? '16 ਅੰਕਾਂ ਦੇ CNR ਨੰਬਰ ਨਾਲ ਕੇਸ ਦੀ ਸਥਿਤੀ ਕਿਵੇਂ ਦੇਖੀਏ?' :
             'How to check court case status using 16-digit CNR number?',
       badge: 'eCourts'
     },
     {
       category: 'NALSA & Legal Aid',
-      text: language === 'hi' ? 'नालसा धारा 12 के तहत मुफ्त कानूनी सहायता के लिए कौन पात्र है?' :
+      text: language === 'bho' ? 'नालसा धारा 12 के तहत केकरा के मुफ्त कानूनी सहायता मिली?' :
+            language === 'hi' ? 'नालसा धारा 12 के तहत मुफ्त कानूनी सहायता के लिए कौन पात्र है?' :
             language === 'pa' ? 'ਨਾਲਸਾ ਧਾਰਾ 12 ਤਹਿਤ ਮੁਫ਼ਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਲਈ ਕੌਣ ਯੋਗ ਹੈ?' :
             'Who is eligible for free legal aid under Section 12 of LSA Act?',
       badge: 'Section 12'
     },
     {
       category: 'Nyaya Bandhu',
-      text: language === 'hi' ? 'न्याय बंधु प्रो-बोनो अधिवक्ता सेवा क्या है और कौन जुड़ सकता है?' :
+      text: language === 'bho' ? 'न्याय बंधु प्रो-बोनो अधिवक्ता योजना का हवे आ एकरा से कइसे जुड़ल जाव?' :
+            language === 'hi' ? 'न्याय बंधु प्रो-बोनो अधिवक्ता सेवा क्या है और कौन जुड़ सकता है?' :
             language === 'pa' ? 'ਨਿਆਂ ਬੰਧੂ ਪ੍ਰੋ-ਬੋਨੋ ਵਕੀਲ ਸੇਵਾ ਕੀ ਹੈ?' :
             'What is the Nyaya Bandhu Pro Bono legal service scheme?',
       badge: 'Pro Bono'
     },
     {
       category: 'Gram Nyayalaya',
-      text: language === 'hi' ? 'ग्रामीण क्षेत्रों में ग्राम न्यायालय कैसे कार्य करते हैं?' :
+      text: language === 'bho' ? 'देहात आ गांव में ग्राम न्यायालय कइसे काम करेला?' :
+            language === 'hi' ? 'ग्रामीण क्षेत्रों में ग्राम न्यायालय कैसे कार्य करते हैं?' :
             language === 'pa' ? 'ਪੇਂਡੂ ਖੇਤਰਾਂ ਵਿੱਚ ਗ੍ਰਾਮ ਨਿਆਂਲਿਆ ਕਿਵੇਂ ਕੰਮ ਕਰਦੇ ਹਨ?' :
             'How do Gram Nyayalayas function in rural villages?',
       badge: 'Grassroots'
     },
     {
       category: 'Fast Track Courts',
-      text: language === 'hi' ? 'पॉक्सो और दुष्कर्म मामलों के लिए फास्ट ट्रैक स्पेशल कोर्ट (FTSC) क्या हैं?' :
+      text: language === 'bho' ? 'पॉक्सो आ दुष्कर्म के मामला खातिर फास्ट ट्रैक कोर्ट (FTSC) का हवे?' :
+            language === 'hi' ? 'पॉक्सो और दुष्कर्म मामलों के लिए फास्ट ट्रैक स्पेशल कोर्ट (FTSC) क्या हैं?' :
             language === 'pa' ? 'ਪੋਕਸੋ ਕੇਸਾਂ ਲਈ ਫਾਸਟ ਟਰੈਕ ਵਿਸ਼ੇਸ਼ ਅਦਾਲਤਾਂ (FTSC) ਕੀ ਹਨ?' :
             'What are Fast Track Special Courts (FTSCs) for POCSO cases?',
       badge: 'Speedy Trial'

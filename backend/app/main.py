@@ -57,7 +57,7 @@ def health_check():
         "active_llm_provider": provider_name,
         "indexed_chunks": len(rag_service.chunks),
         "total_documents": len(rag_service.raw_documents),
-        "supported_languages": ["en", "hi", "pa"]
+        "supported_languages": ["en", "hi", "pa", "bho"]
     }
 
 # -------------------------------------------------------------

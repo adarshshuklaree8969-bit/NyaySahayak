@@ -52,6 +52,7 @@ def get_analytics_summary(db: Session = Depends(get_db)):
         lang_dist = [
             {"language": "en", "count": 245},
             {"language": "hi", "count": 182},
+            {"language": "bho", "count": 78},
             {"language": "pa", "count": 48}
         ]
         

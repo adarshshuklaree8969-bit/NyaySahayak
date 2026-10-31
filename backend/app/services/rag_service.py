@@ -36,6 +36,20 @@ MULTILINGUAL_CONCEPT_MAP = {
     "ਗ੍ਰਾਮ ਨਿਆਂਲਿਆ": "gram nyayalaya village court panchayat",
     "ਫਾਸਟ ਟਰੈਕ": "fast track special court ftsc pocso",
     "ਨਿਆਂ ਵਿਭਾਗ": "department of justice judges appointment",
+
+    # Bhojpuri
+    "टेली-लॉ": "tele-law telelaw tele law csc video legal advice",
+    "मुफ्त वकील": "free legal aid nalsa legal services section 12 pro bono",
+    "कानूनी मदद": "free legal aid nalsa legal services section 12 advice",
+    "केस के स्टेटस": "case status cnr number court filing e-filing",
+    "केस के स्थिति": "case status cnr number court filing e-filing",
+    "सीएनआर": "cnr number ecourts case status",
+    "ग्राम कचहरी": "gram nyayalaya village court panchayat",
+    "कचहरी": "court judicial complex district court",
+    "अरजी": "application filing petition court",
+    "अपील": "appeal lok adalat court",
+    "पॉक्सो": "pocso fast track special court ftsc child abuse",
+    "दुष्कर्म": "rape fast track special court ftsc speedy trial",
 }
 
 class RAGService:
@@ -99,11 +113,11 @@ class RAGService:
 
     def detect_intent(self, query: str) -> str:
         q = query.lower()
-        if any(w in q for w in ["cnr", "case status", "ecourt", "e-court", "court order", "judgment", "status of my case", "केस", "ਕੇਸ"]):
+        if any(w in q for w in ["cnr", "case status", "ecourt", "e-court", "court order", "judgment", "status of my case", "केस", "ਕੇਸ", "सीएनआर", "स्थिति", "कचहरी"]):
             return "Judicial Services & Case Tracking"
-        elif any(w in q for w in ["tele-law", "tele law", "telelaw", "csc", "वकील", "सलाह", "ਟੈਲੀ-ਲਾਅ"]):
+        elif any(w in q for w in ["tele-law", "tele law", "telelaw", "csc", "वकील", "सलाह", "ਟੈਲੀ-ਲਾਅ", "टेली-लॉ"]):
             return "Tele-Law & Citizen Advice"
-        elif any(w in q for w in ["legal aid", "free legal", "nalsa", "slsa", "dlsa", "15100", "lok adalat", "मुफ्त कानूनी", "ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ"]):
+        elif any(w in q for w in ["legal aid", "free legal", "nalsa", "slsa", "dlsa", "15100", "lok adalat", "मुफ्त कानूनी", "ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ", "मुफ्त वकील", "कानूनी मदद"]):
             return "Free Legal Aid & Lok Adalat"
         elif any(w in q for w in ["nyaya bandhu", "pro bono", "volunteer advocate", "न्याय बंधु"]):
             return "Nyaya Bandhu (Pro Bono)"

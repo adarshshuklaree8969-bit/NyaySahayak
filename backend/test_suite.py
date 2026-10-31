@@ -34,9 +34,13 @@ def run_tests():
     assert "text/html" in res_spa.headers.get("content-type", "")
     print("✓ Deep route [/chat] successfully falls back to SPA index.html")
 
-    res_asset = client.get("/assets/index-D3WnMxW6.js")
+    # Dynamically find an asset file in frontend/dist/assets
+    assets_dir = Path(__file__).resolve().parent.parent / "frontend" / "dist" / "assets"
+    js_files = list(assets_dir.glob("*.js")) if assets_dir.exists() else []
+    asset_name = js_files[0].name if js_files else "index.js"
+    res_asset = client.get(f"/assets/{asset_name}")
     assert res_asset.status_code == 200
-    print("✓ Static frontend asset [/assets/index-D3WnMxW6.js] served successfully")
+    print(f"✓ Static frontend asset [/assets/{asset_name}] served successfully")
 
     res_api_info = client.get("/api")
     assert res_api_info.status_code == 200
@@ -56,6 +60,7 @@ def run_tests():
     print("✓ Active LLM Provider:", health["active_llm_provider"])
     print("✓ Indexed Chunks:", health["indexed_chunks"])
     print("✓ Supported Languages:", health["supported_languages"])
+    assert "bho" in health["supported_languages"], "Bhojpuri not reported in supported_languages"
 
     # 2. English Chat Query
     print("\n[TEST 2] Testing English Chat Query (Tele-Law)...")
@@ -95,6 +100,57 @@ def run_tests():
     data_pa = res_pa.json()
     print("✓ Punjabi Intent Detected:", data_pa["intent"])
     print("✓ Punjabi Response Preview:", data_pa["message"][:80], "...")
+
+    # 4A. Bhojpuri Chat Query (Strict Independent Detection & Authentic Response)
+    print("\n[TEST 4A] Testing Bhojpuri Legal Query (Tele-Law & Free Lawyer)...")
+    bho_query = "टेली-लॉ योजना का हवे आ एकरा से मुफ्त में वकील कइसे मिली?"
+    res_bho = client.post("/api/chat/message", json={
+        "message": bho_query
+    })
+    assert res_bho.status_code == 200, f"Expected 200, got {res_bho.status_code}"
+    data_bho = res_bho.json()
+    bho_session_id = data_bho["session_id"]
+    assert data_bho["language"] == "bho", f"Expected language 'bho', got {data_bho['language']}"
+    assert data_bho["intent"] == "Tele-Law & Citizen Advice", f"Unexpected intent {data_bho['intent']}"
+    
+    # Verify authentic Bhojpuri grammar and markers
+    bho_text = data_bho["message"]
+    has_bho_markers = any(m in bho_text for m in ["बा", "बाटे", "बानी", "रउवा", "कइल जाई", "मिली", "हवे"])
+    assert has_bho_markers, "Response missing authentic Bhojpuri markers!"
+    print("✓ Bhojpuri Detected Independently from Hindi:", data_bho["language"])
+    print("✓ Bhojpuri Intent:", data_bho["intent"])
+    print("✓ Bhojpuri Response Preview:", bho_text[:110], "...")
+    print("✓ Bhojpuri Disclaimer:", data_bho["disclaimer"])
+    assert "ई एआई सहायक" in data_bho["disclaimer"]
+    print("✓ Bhojpuri Suggested Follow-ups Count:", len(data_bho["suggested_followups"]))
+    assert any("कइसे" in f or "मिलेला" in f for f in data_bho["suggested_followups"])
+
+    # 4B. Bhojpuri Follow-up & Language Consistency
+    print("\n[TEST 4B] Testing Bhojpuri Follow-up & Language Continuity...")
+    bho_followup = "का एकरा खातिर कवनो फीस लागेला?"
+    res_follow = client.post("/api/chat/message", json={
+        "session_id": bho_session_id,
+        "message": bho_followup
+    })
+    assert res_follow.status_code == 200
+    data_follow = res_follow.json()
+    assert data_follow["language"] == "bho", f"Expected 'bho', got {data_follow['language']}"
+    assert any(m in data_follow["message"] for m in ["बा", "फीस", "मुफ्त", "रउवा", "ना"]), "Follow-up response not in Bhojpuri!"
+    print("✓ Bhojpuri Follow-up maintained conversation language:", data_follow["language"])
+    print("✓ Bhojpuri Follow-up Response Preview:", data_follow["message"][:100], "...")
+
+    # 4C. Strict Independent Language Matching Across 4 Languages
+    print("\n[TEST 4C] Testing Strict Independent Language Detection across all 4 Languages...")
+    from app.api.chat import detect_language
+    assert detect_language("What is the procedure for eCourts case status?") == "en"
+    assert detect_language("ई-कोर्ट पर केस स्टेटस की प्रक्रिया क्या है?") == "hi"
+    assert detect_language("ਈ-ਕੋਰਟ 'ਤੇ ਕੇਸ ਦੀ ਸਥਿਤੀ ਕਿਵੇਂ ਦੇਖੀਏ?") == "pa"
+    assert detect_language("ई-कोर्ट में केस के स्थिति कइसे देखल जाई?") == "bho"
+    assert detect_language("हमके मुफ्त वकील चाहीं, तनी समझाईं") == "bho"
+    print("✓ English independently detected as: en")
+    print("✓ Hindi independently detected as: hi")
+    print("✓ Punjabi independently detected as: pa")
+    print("✓ Bhojpuri independently detected as: bho")
 
     # 5. Chat History
     print("\n[TEST 5] Testing Chat History retrieval...")

@@ -14,6 +14,67 @@ from app.services.llm_service import llm_service, DISCLAIMER_TEXTS
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
 
+# Distinctive Bhojpuri markers (lexical, grammatical, pronouns, auxiliaries, inflectional suffixes)
+BHOJPURI_WORDS = {
+    "बा", "बाटे", "बानी", "बाड़न", "बाड़ू", "बाड़ऽ", "बाड़ा", "रहुवे", "रहलन",
+    "रउवा", "रउरा", "तोहार", "हमार", "हमारन", "ओकरा", "केकरा", "एह", "ओह", "कवनो", "केहू",
+    "कइसे", "काहें", "काहे", "होई", "होखी", "कइल", "कइले", "लिहल", "देखल", "करल",
+    "जाई", "जाइब", "आई", "मिली", "मिलत", "करेला", "होखेला", "भइल", "गइल", "आइल", "चाहत",
+    "हवे", "हटे", "सभे", "लोगन", "तनी", "संगे", "बुझात", "बताईं", "दीं", "खातिर", "खाती",
+    "हमनी", "अपने", "काहेंला", "लागेला", "पूछत", "बतावल", "देखाई", "बोलत"
+}
+
+BHOJPURI_PHRASES = [
+    "का हवे", "का हटे", "का बा", "कइल जाई", "कइसे होई", "केकरा के", "चाहत बानी",
+    "बता दीं", "मदद मिली", "सलाह मिली", "कइसे मिली", "केस के", "अरजी देब",
+    "देखल जाव", "कइसे देखल", "काहे ना", "फीस लागेला", "फीस बा", "कइसे लिहल",
+    "जोड़ल जाव", "जुड़ल जाव", "कइसे काम", "का बाटे", "तनी समझाईं", "बतावल जाव"
+]
+
+ROMAN_BHOJPURI_MARKERS = [
+    "kaise", "baate", "raua", "kekra", "khati", "khatir", "kail jaai", "baani",
+    "bhojpuri", "ka hawe", "ka bate", "lagela", "dekhai", "tohake", "hamar"
+]
+
+def detect_language(text: str, explicit_lang: Optional[str] = None, session_lang: Optional[str] = None) -> str:
+    raw = (text or "").strip()
+    if not raw:
+        return explicit_lang or session_lang or "en"
+
+    # 1. Punjabi Detection via Gurmukhi Script range
+    if any("\u0A00" <= ch <= "\u0A7F" for ch in raw):
+        return "pa"
+
+    # 2. Independent Bhojpuri Detection
+    cleaned = raw.lower().replace("?", " ").replace("!", " ").replace(".", " ").replace(",", " ")
+    tokens = set(cleaned.split())
+
+    has_bho_phrase = any(phrase in cleaned for phrase in BHOJPURI_PHRASES)
+    has_bho_word = bool(tokens.intersection(BHOJPURI_WORDS))
+    has_roman_bho = any(rm in cleaned for rm in ROMAN_BHOJPURI_MARKERS)
+
+    if has_bho_phrase or has_bho_word or has_roman_bho:
+        return "bho"
+
+    # Explicit client selection takes priority if set to a valid non-English code
+    if explicit_lang == "bho":
+        return "bho"
+
+    # 3. Hindi Detection (Devanagari script without Bhojpuri markers)
+    if any("\u0900" <= ch <= "\u097F" for ch in raw):
+        return "hi"
+
+    if explicit_lang in ["hi", "pa", "bho", "en"]:
+        return explicit_lang
+
+    # 4. Follow-up language retention in existing conversation
+    if session_lang in ["bho", "hi", "pa"]:
+        # If short follow-up without strong English indicators
+        if len(tokens) <= 6:
+            return session_lang
+
+    return "en"
+
 @router.post("/message", response_model=ChatResponse)
 async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
     start_time = time.time()
@@ -24,6 +85,14 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
         session_id = f"session_{uuid.uuid4().hex[:12]}"
         
     session = db.query(ChatSession).filter(ChatSession.session_id == session_id).first()
+    
+    # Detect language strictly and independently
+    detected_lang = detect_language(
+        text=req.message,
+        explicit_lang=req.language,
+        session_lang=session.language if session else None
+    )
+
     if not session:
         # Title is clean snippet of first message
         title_snippet = req.message[:45] + ("..." if len(req.message) > 45 else "")
@@ -31,19 +100,20 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
             session_id=session_id,
             user_identifier=req.user_identifier or "anonymous",
             title=title_snippet,
-            language=req.language or "en"
+            language=detected_lang
         )
         db.add(session)
         db.commit()
     else:
-        session.language = req.language or session.language
+        session.language = detected_lang
+        db.commit()
         
     # Store user message
     user_msg = ChatMessage(
         session_id=session_id,
         role="user",
         content=req.message,
-        language=req.language or "en"
+        language=detected_lang
     )
     db.add(user_msg)
     db.commit()
@@ -67,7 +137,7 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
         retrieved_chunks=retrieved_chunks,
         conversation_history=history_dicts,
         intent=intent,
-        language=req.language or "en"
+        language=detected_lang
     )
     
     # Format Source Citations
@@ -86,7 +156,7 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
             confidence_score=c.get("similarity_score", 0.85)
         ))
         
-    disclaimer = DISCLAIMER_TEXTS.get(req.language or "en", DISCLAIMER_TEXTS["en"])
+    disclaimer = DISCLAIMER_TEXTS.get(detected_lang, DISCLAIMER_TEXTS["en"])
     
     # Store assistant message
     asst_msg = ChatMessage(
@@ -94,7 +164,7 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
         role="assistant",
         content=answer,
         intent=intent,
-        language=req.language or "en",
+        language=detected_lang,
         sources_json=json.dumps([cit.dict() for cit in citations]),
         suggested_followups_json=json.dumps(followups)
     )
@@ -106,7 +176,7 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
     log = AnalyticsLog(
         query_text=req.message,
         intent=intent,
-        language=req.language or "en",
+        language=detected_lang,
         response_time_ms=elapsed_ms,
         was_answered=was_answered
     )
@@ -118,7 +188,7 @@ async def send_chat_message(req: ChatRequest, db: Session = Depends(get_db)):
         message=answer,
         role="assistant",
         intent=intent,
-        language=req.language or "en",
+        language=detected_lang,
         sources=citations,
         suggested_followups=followups,
         disclaimer=disclaimer,

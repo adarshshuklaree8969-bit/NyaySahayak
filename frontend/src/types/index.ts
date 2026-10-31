@@ -1,4 +1,4 @@
-export type Language = 'en' | 'hi' | 'pa';
+export type Language = 'en' | 'hi' | 'pa' | 'bho';
 
 export interface SourceCitation {
   title: string;

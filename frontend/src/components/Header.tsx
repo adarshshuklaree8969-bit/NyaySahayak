@@ -145,6 +145,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, adm
                 <option value="en" className="dark:bg-slate-800">English</option>
                 <option value="hi" className="dark:bg-slate-800">हिन्दी</option>
                 <option value="pa" className="dark:bg-slate-800">ਪੰਜਾਬੀ</option>
+                <option value="bho" className="dark:bg-slate-800">भोजपुरी</option>
               </select>
             </div>
 
