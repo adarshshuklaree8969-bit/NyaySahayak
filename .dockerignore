@@ -1,12 +1,44 @@
-.git
-.github
+# Dependency directories (never copy node_modules into docker)
+**/node_modules
+frontend/node_modules
+backend/node_modules
 node_modules
-__pycache__
-*.pyc
-*.pyo
-*.pyd
+
+# Environment and secret files
+**/.env
 .env
-nyaysahayak.db
+backend/.env
+**/.env.*
+
+# Python bytecode and caches
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Build output directories
+**/dist
+frontend/dist
 dist
+
+# Local databases & uploads
+**/*.db
+**/*.sqlite3
+backend/*.db
+nyaysahayak.db
+backend/uploads/
+uploads/
+
+# Package manager local caches and lock overrides
+**/.npmrc
+frontend/.npmrc
+pnpm-workspace.yaml
+pnpm-lock.yaml
+
+# Git, IDE, and temporary files
+.git
+.gitignore
+.github
 .vscode
 .idea
+*.log
