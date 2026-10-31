@@ -40,8 +40,9 @@ RUN pip install --no-cache-dir -r ./backend/requirements.txt
 # Copy backend application
 COPY backend/ ./backend/
 
-# Copy compiled React frontend from Stage 1 into frontend/dist
+# Copy compiled React frontend from Stage 1 into frontend/dist and backend/dist
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
+COPY --from=frontend-builder /app/frontend/dist ./backend/dist
 
 WORKDIR /app/backend
 

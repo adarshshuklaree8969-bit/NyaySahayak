@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from pathlib import Path
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -34,8 +35,10 @@ app.include_router(feedback.router, prefix=settings.API_V1_STR)
 app.include_router(documents.router, prefix=settings.API_V1_STR)
 app.include_router(analytics.router, prefix=settings.API_V1_STR)
 
-@app.get("/")
-def root():
+# API Root & Health Endpoints
+@app.get("/api")
+@app.get("/api/")
+def api_root():
     return {
         "project": "NyaySahayak (न्याय सहायक)",
         "ministry": "Ministry of Law & Justice, Government of India",
@@ -57,20 +60,55 @@ def health_check():
         "supported_languages": ["en", "hi", "pa"]
     }
 
-# Serve compiled Frontend SPA if dist exists (All-in-One Cloud Deployment)
-frontend_dist = settings.BASE_DIR.parent / "frontend" / "dist"
-if frontend_dist.exists() and (frontend_dist / "index.html").exists():
-    if (frontend_dist / "assets").exists():
-        app.mount("/assets", StaticFiles(directory=str(frontend_dist / "assets")), name="assets")
+# -------------------------------------------------------------
+# Frontend SPA & Static Assets Serving Configuration
+# -------------------------------------------------------------
+def _find_frontend_dist() -> Path | None:
+    candidates = [
+        settings.BASE_DIR.parent / "frontend" / "dist",
+        Path("/app/frontend/dist"),
+        Path("/app/backend/dist"),
+        settings.BASE_DIR / "dist",
+        Path("frontend/dist").resolve(),
+        Path("../frontend/dist").resolve(),
+    ]
+    for candidate in candidates:
+        if candidate.exists() and (candidate / "index.html").is_file():
+            return candidate
+    return None
 
-    @app.get("/{full_path:path}")
-    def serve_frontend_spa(full_path: str):
-        if full_path.startswith("api") or full_path in ["docs", "redoc", "openapi.json"]:
-            return {"detail": "Not Found"}
+frontend_dist = _find_frontend_dist()
+
+# Mount /assets if frontend build exists
+if frontend_dist and (frontend_dist / "assets").exists():
+    app.mount("/assets", StaticFiles(directory=str(frontend_dist / "assets")), name="assets")
+
+# Root URL (/) serves the React Frontend
+@app.get("/")
+def serve_root():
+    if frontend_dist and (frontend_dist / "index.html").is_file():
+        return FileResponse(str(frontend_dist / "index.html"), media_type="text/html")
+    return api_root()
+
+# Catch-all SPA Fallback for client-side routing (/chat, /about, /features, /admin, etc.)
+@app.get("/{full_path:path}")
+def serve_frontend_spa(full_path: str):
+    # Never let the SPA catch-all override API, Swagger, or OpenAPI routes
+    if full_path.startswith("api/") or full_path == "api" or full_path in ["docs", "redoc", "openapi.json"]:
+        raise HTTPException(status_code=404, detail="API endpoint not found")
+
+    if frontend_dist:
+        # Check if the requested path corresponds to a real static file in dist
         target_file = frontend_dist / full_path
         if target_file.exists() and target_file.is_file():
-            return FileResponse(target_file)
-        return FileResponse(frontend_dist / "index.html")
+            return FileResponse(str(target_file))
+
+        # Client-side route fallback: return index.html for React Router / SPA navigation
+        index_file = frontend_dist / "index.html"
+        if index_file.is_file():
+            return FileResponse(str(index_file), media_type="text/html")
+
+    raise HTTPException(status_code=404, detail="Frontend build not found")
 
 if __name__ == "__main__":
     import uvicorn

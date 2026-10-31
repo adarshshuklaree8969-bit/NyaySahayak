@@ -21,6 +21,32 @@ def run_tests():
     print("   NYAYSAHAYAK COMPREHENSIVE AUTOMATED TEST SUITE")
     print("=" * 70)
 
+    # 0. Frontend SPA Serving & Fallback Checks
+    print("\n[TEST 0] Testing Frontend Root & SPA Fallback serving...")
+    res_root = client.get("/")
+    assert res_root.status_code == 200, f"Expected 200, got {res_root.status_code}"
+    assert "text/html" in res_root.headers.get("content-type", "")
+    assert '<div id="root">' in res_root.text
+    print("✓ Root [/] successfully serves React SPA HTML index")
+
+    res_spa = client.get("/chat")
+    assert res_spa.status_code == 200
+    assert "text/html" in res_spa.headers.get("content-type", "")
+    print("✓ Deep route [/chat] successfully falls back to SPA index.html")
+
+    res_asset = client.get("/assets/index-D3WnMxW6.js")
+    assert res_asset.status_code == 200
+    print("✓ Static frontend asset [/assets/index-D3WnMxW6.js] served successfully")
+
+    res_api_info = client.get("/api")
+    assert res_api_info.status_code == 200
+    assert "application/json" in res_api_info.headers.get("content-type", "")
+    print("✓ API Info [/api] returns valid JSON metadata")
+
+    res_404 = client.get("/api/unknown_endpoint")
+    assert res_404.status_code == 404
+    print("✓ Unhandled API endpoint correctly returns 404 without catching SPA")
+
     # 1. Health Check
     print("\n[TEST 1] Testing /api/health endpoint...")
     res = client.get("/api/health")
