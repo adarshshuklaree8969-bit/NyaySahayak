@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: nyaysahayak
+    env: python
+    buildCommand: "pip install -r backend/requirements.txt && cd frontend && npm install && npm run build && cd .."
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    envVars:
+      - key: PROJECT_NAME
+        value: "NyaySahayak - Department of Justice Virtual Assistant"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: LLM_PROVIDER
+        value: "AUTO"
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SMTP_HOST
+        value: "smtp.gmail.com"
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false

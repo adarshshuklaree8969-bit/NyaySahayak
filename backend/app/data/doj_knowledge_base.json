@@ -1,0 +1,92 @@
+[
+  {
+    "id": "doc_tele_law",
+    "title": "Tele-Law: Reaching the Unreached",
+    "category": "Government Scheme",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/tele-law/",
+    "secondary_url": "https://tele-law.in/",
+    "last_updated": "2024-09",
+    "content": "Tele-Law is a flagship initiative launched by the Department of Justice, Ministry of Law & Justice, in partnership with CSC e-Governance Services India Limited. The primary objective of Tele-Law is 'Reaching the Unreached' by mainstreaming legal aid through technology for marginalized, poor, and vulnerable communities in rural and remote regions of India.\n\nKey Mechanisms:\n1. Common Service Centres (CSCs): Citizens can visit any nearby CSC where a Village Level Entrepreneur (VLE) or Para-Legal Volunteer (PLV) assists them in registering and scheduling an appointment.\n2. Tele-Law Mobile App: Citizens and advocates can also directly use the Tele-Law Citizen Mobile Application (available on Google Play Store and iOS App Store) in 22 scheduled Indian languages to consult panel lawyers directly from their smartphones.\n3. Panel Lawyers: Experienced lawyers empanelled by State Legal Services Authorities (SLSA) and CSC connect with citizens via video conferencing or voice call to provide legal consultation, preliminary advice, and guidance on dispute resolution.\n4. Integration with NALSA: If a matter requires court representation and the citizen is eligible under Section 12 of the Legal Services Authorities Act 1987, the case is seamlessly referred to the District Legal Services Authority (DLSA) for appointment of a free legal aid advocate.\n\nEligibility for Free Legal Advice:\nAs per Section 12 of the Legal Services Authorities Act, 1987, free advice is provided to:\n- Women and Children\n- Members of Scheduled Castes (SC) and Scheduled Tribes (ST)\n- Victims of human trafficking or begar (bonded labor)\n- Persons with disabilities / differently abled\n- Victims of mass disasters, ethnic violence, caste atrocities, floods, earthquakes, or industrial disasters\n- Industrial workmen\n- Persons in custody or juvenile homes\n- Low-income citizens (annual income below state-mandated threshold, typically up to ₹3,00,000 in most states).\n\nOther citizens can avail legal advice at a nominal fee of ₹30.\n\nCoverage and Impact:\nTele-Law is operational in all 36 States and Union Territories covering over 2.5 lakh Gram Panchayats and has successfully delivered more than 65 Lakh pre-litigation legal advice consultations to citizens across India."
+  },
+  {
+    "id": "doc_nyaya_bandhu",
+    "title": "Nyaya Bandhu: Pro Bono Legal Services",
+    "category": "Government Scheme",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/nyaya-bandhu-pro-bono-legal-services/",
+    "secondary_url": "https://www.probono-doj.in/",
+    "last_updated": "2024-08",
+    "content": "Nyaya Bandhu (Pro Bono Legal Services) is an initiative launched by the Department of Justice under the Constitutional mandate of Article 39A, which directs the State to ensure that opportunities for securing justice are not denied to any citizen by reason of economic or other disabilities.\n\nCore Concept:\nNyaya Bandhu establishes a formal, tech-enabled framework to encourage, connect, and mobilize practicing advocates across the country who are willing to volunteer their time and expertise to provide free (pro bono) legal advice and representation to underprivileged litigants.\n\nHow the Mobile App Works:\n1. Litigants: An eligible applicant registers on the Nyaya Bandhu Mobile App (Android/iOS) or web portal, submits case details and proofs of eligibility under Section 12 of the Legal Services Authorities Act, 1987.\n2. Advocates: Practicing advocates sign up on the platform, indicating their jurisdiction, areas of practice (Civil, Criminal, Family, Constitutional, Cyber, etc.), and court preferences (Supreme Court, High Courts, District Courts, Tribunals).\n3. Algorithm Matching: The system connects the eligible applicant with an available volunteer advocate based on language, court location, and legal specialization.\n\nPro Bono Clubs:\nTo inculcate a culture of public interest lawyering among the youth, the Department of Justice has established 'Pro Bono Clubs' across top law universities and colleges throughout India. These law schools assist in case documentation, client interviews, and legal research under faculty supervision."
+  },
+  {
+    "id": "doc_ecourts_project",
+    "title": "eCourts Mission Mode Project (Phases I, II, & III)",
+    "category": "Judicial Services",
+    "source_name": "e-Committee, Supreme Court of India & Department of Justice",
+    "source_url": "https://ecourts.gov.in/",
+    "secondary_url": "https://services.ecourts.gov.in/",
+    "last_updated": "2024-10",
+    "content": "The eCourts Mission Mode Project is a Pan-India project monitored and funded by the Department of Justice, Ministry of Law and Justice, jointly with the e-Committee of the Supreme Court of India.\n\nKey Objectives:\n1. Transform the Indian judiciary by ICT enablement of courts.\n2. Provide efficient and time-bound citizen-centric legal services.\n3. Develop, install, and implement judicial decision support systems.\n4. Automate court processes to provide transparency and accessibility to litigants.\n\nProject Phases:\n- Phase I (2010-2015): Computerization of 14,249 district and subordinate court complexes, setting up local area networks and Case Information Software (CIS).\n- Phase II (2015-2023): Video-conferencing facilities in over 3,200 court complexes and 1,272 jails; installation of e-Sewa Kendras in high courts and district courts; nationwide e-Filing 3.0 system; online payment of court fees; and development of the eCourts Services Mobile App with over 1.7 crore downloads.\n- Phase III (Approved in September 2023 with financial outlay of ₹7,210 Crore for 4 years): Focuses on paperless digital courts, seamless cloud migration, AI/ML capabilities for case management, voice-to-text transcriptions, digitization of legacy court records (approx. 3,108 crore document pages), and open APIs for interoperability with police, prisons, and forensic labs (ICJS - Inter-operable Criminal Justice System).\n\nCitizen Online Services:\n- Case Status by CNR Number: Every registered court case has a unique 16-character alphanumeric Case Number Record (CNR). Entering this on ecourts.gov.in or the eCourts app shows full case details, history of hearings, interim orders, and final judgments.\n- National Judicial Data Grid (NJDG): Public dashboard displaying real-time statistics of institution, disposal, and pendency of cases across the Supreme Court, 25 High Courts, and 18,000+ Subordinate Courts.\n- Virtual Courts: Dedicated digital courts for adjudicating petty traffic challans and municipal violations without requiring the physical presence of the violator or judge. Violators can plead guilty and pay fines online via vcourts.gov.in.\n- e-Filing & e-Pay: Allows electronic filing of pleadings, petitions, and evidence 24/7 and payment of court fees, fines, and penalties through https://pay.ecourts.gov.in/."
+  },
+  {
+    "id": "doc_nalsa_legal_aid",
+    "title": "NALSA: Free Legal Aid & Lok Adalats",
+    "category": "Legal Aid",
+    "source_name": "National Legal Services Authority & DoJ",
+    "source_url": "https://nalsa.gov.in/",
+    "secondary_url": "https://doj.gov.in/legal-aid-to-poor/",
+    "last_updated": "2024-09",
+    "content": "The National Legal Services Authority (NALSA) was constituted under the Legal Services Authorities Act, 1987 to provide free and competent legal services to the weaker sections of the society and to organize Lok Adalats for amicable settlement of disputes.\n\nOrganizational Structure:\n1. NALSA: At national level, headed by the Chief Justice of India as Patron-in-Chief and a serving senior Judge of the Supreme Court as Executive Chairman.\n2. Supreme Court Legal Services Committee (SCLSC): Handles legal aid for Supreme Court cases.\n3. State Legal Services Authority (SLSA): At state level, headed by Chief Justice of the respective High Court.\n4. District Legal Services Authority (DLSA): At district level, headed by District & Sessions Judge.\n5. Taluk Legal Services Committees (TLSC): At taluk/mandal/block level.\n\nWho is Eligible for Free Legal Services (Section 12 of LSA Act):\n- Women and children\n- Members of Scheduled Caste or Scheduled Tribe\n- Victims of human trafficking or forced labour (begar)\n- Persons with disabilities\n- Persons who are victims of mass disasters, ethnic violence, caste atrocities, floods, droughts, earthquakes, or industrial disasters\n- Industrial workmen\n- Persons in custody, juvenile homes, or psychiatric hospitals\n- Any citizen whose annual income does not exceed the limit prescribed by the state (ranging from ₹1,00,000 to ₹3,00,000 depending on the State/UT; for Supreme Court cases, up to ₹5,00,000).\n\nServices Provided:\n- Free payment of court fees, process fees, and other charges.\n- Free services of an appointed legal practitioner (advocate) to draft and argue cases.\n- Obtaining and supply of certified copies of orders, judgments, and paper books free of cost.\n\nLok Adalat (People's Court):\n- An Alternative Dispute Resolution (ADR) mechanism recognized under statutory law.\n- Conducts pre-litigation and pending case settlements for compoundable criminal cases, cheque bounce (NI Act Section 138), motor accident claims (MACT), matrimonial disputes, labor disputes, land acquisition, and utility bills.\n- Benefits: No court fee (if existing case settled, court fee is refunded). Non-adversarial procedure. Award is final, binding, and deemed equivalent to a civil court decree. No appeal lies against an award of Lok Adalat.\n- National Legal Aid Helpline Number: 15100 (Toll-Free, 24x7)."
+  },
+  {
+    "id": "doc_fast_track_courts",
+    "title": "Fast Track Special Courts (FTSCs)",
+    "category": "Judicial Infrastructure",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/fast-track-special-court-ftsc/",
+    "secondary_url": "https://doj.gov.in/nirbhaya-fund/",
+    "last_updated": "2024-07",
+    "content": "The Fast Track Special Courts (FTSCs) Scheme is a Centrally Sponsored Scheme formulated by the Department of Justice following the Criminal Law (Amendment) Act, 2018.\n\nObjective:\nTo ensure swift justice, expedite trial, and clear the backlog of pending cases of rape and cases registered under the Protection of Children from Sexual Offences (POCSO) Act, 2012.\n\nKey Highlights:\n1. Dedicated Courts: Out of over 750 operational FTSCs across 30 States and UTs, more than 400 are exclusive POCSO Courts.\n2. Child-Friendly Procedures: Courts are equipped with Vulnerable Witness Deposition Centres (VWDC) to ensure children and victims can testify without facing the accused, avoiding secondary traumatization.\n3. Funding: Implemented under the Nirbhaya Framework where the Central Government provides 60% of the funds (90% for North Eastern and Himalayan States, 100% for UTs without legislature) from the Nirbhaya Fund.\n4. Target Disposal Timeline: Seeks trial disposal within one year of charge-sheeting."
+  },
+  {
+    "id": "doc_gram_nyayalayas",
+    "title": "Gram Nyayalayas: Justice at Rural Doorsteps",
+    "category": "Judicial Infrastructure",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/gram-nyayalaya/",
+    "secondary_url": "https://legislative.gov.in/actsofparliamentfromtheyear/gram-nyayalayas-act-2008",
+    "last_updated": "2024-06",
+    "content": "The Gram Nyayalayas Act, 2008 was enacted by Parliament to provide for the establishment of Gram Nyayalayas at grassroots level for the purpose of providing access to justice to citizens at their doorsteps and ensuring that opportunities for securing justice are not denied to any citizen.\n\nKey Provisions:\n1. Jurisdiction: Established for every Panchayat at intermediate level or a group of contiguous Panchayats in a district.\n2. Nyayadhikari: Presiding officer appointed by the State Government in consultation with the High Court, possessing qualifications of a Judicial Magistrate of the First Class.\n3. Mobile Court: The Nyayadhikari holds periodic mobile courts in remote villages to resolve disputes locally, minimizing travel expenses and legal delays for villagers.\n4. Scope of Matters: Can try criminal cases with punishment up to 2 years (theft, simple injury, cattle trespass) and civil suits regarding property boundaries, water rights, agricultural land tenancy, minimum wages, and recovery of movable property.\n5. Conciliation First: Mandated to attempt settlement between parties through appointed Conciliators before proceeding to formal adjudication.\n6. Procedure: Follows summary trial procedure; not bound by hyper-technical rules of the Indian Evidence Act, 1872, but guided by the principles of natural justice."
+  },
+  {
+    "id": "doc_disha_scheme",
+    "title": "DISHA: Designing Innovative Solutions for Holistic Access to Justice",
+    "category": "Government Scheme",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/access-to-justice-disha/",
+    "secondary_url": "https://doj.gov.in/",
+    "last_updated": "2024-08",
+    "content": "The DISHA Scheme (2021-2026) is a comprehensive umbrella scheme approved with a financial allocation of ₹250 Crore to merge and scale access-to-justice programs across India.\n\nComponents of DISHA:\n1. Tele-Law: Upgraded technology platform and outreach to deliver pre-litigation advice across all 765+ districts.\n2. Nyaya Bandhu: Expansion of pro bono advocacy network and onboarding of law schools through Pro Bono Clubs.\n3. Nyaya Mitra: Engaged retired judicial officers and executive magistrates to identify and assist district courts in clearing civil and criminal cases pending for more than 10 years.\n4. Pan-India Legal Literacy & Awareness: Standardized multimedia legal information campaigns, pamphlets, street theatre, and community radio to sensitize citizens about fundamental rights, duties, welfare entitlements, and grievance redressal mechanisms."
+  },
+  {
+    "id": "doc_judicial_infrastructure",
+    "title": "Centrally Sponsored Scheme for Judicial Infrastructure",
+    "category": "Judicial Infrastructure",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/development-of-infrastructure-facilities-for-judiciary/",
+    "secondary_url": "https://nyayvikas.gov.in/",
+    "last_updated": "2024-08",
+    "content": "The Centrally Sponsored Scheme (CSS) for the Development of Infrastructure Facilities for the Judiciary has been operational since 1993-94 to assist State Governments in building court halls and residential units for judicial officers of District and Subordinate Courts.\n\nFeatures:\n1. Funding Pattern: Central and State funding ratio is 60:40 for General States, 90:10 for North Eastern and Himalayan States, and 100% for Union Territories.\n2. Modern Court Amenities: Construction of courtrooms, lawyers' halls, computerized record rooms, litigant waiting areas, disabled-friendly ramps, tactile paving, and digital display boards.\n3. Nyaya Vikas Web Portal & Mobile App: A geo-tagging based portal launched by DoJ to monitor the physical and financial progress of court infrastructure projects in real-time using ISRO's Bhuvan satellite platform."
+  },
+  {
+    "id": "doc_doj_overview",
+    "title": "Department of Justice: Mission, Mandate & Judicial Appointments",
+    "category": "Department Policies",
+    "source_name": "Department of Justice, Govt. of India",
+    "source_url": "https://doj.gov.in/about-us/",
+    "secondary_url": "https://lawmin.gov.in/",
+    "last_updated": "2024-10",
+    "content": "The Department of Justice is one of the three departments under the Ministry of Law and Justice, Government of India (along with Legislative Department and Department of Legal Affairs).\n\nPrimary Functions:\n1. Appointment, Resignation, and Removal of the Chief Justice of India, Judges of the Supreme Court of India, and Chief Justices and Judges of the 25 High Courts under Articles 124, 217, and 224 of the Constitution of India.\n2. Administration of Justice and judicial administration in Union Territories.\n3. Conditions of service, salaries, allowances, and pensions of Supreme Court and High Court Judges.\n4. Facilitating modernization and computerization of the Indian judiciary through the eCourts Project.\n5. Implementation of legal aid, legal awareness, and access to justice schemes (Tele-Law, Nyaya Bandhu, DISHA).\n6. National Mission for Justice Delivery and Legal Reforms: Focused on clearing court backlogs, enhancing capacity of judges, and improving ease of doing business through the 'Enforcing Contracts' indicator under Commercial Courts Act, 2015.\n\nStatutory Disclaimer:\nNyaySahayak is an AI digital assistant providing general information for public awareness and citizen convenience. It does not provide personalized legal counsel or substitute formal orders from courts or the Department of Justice."
+  }
+]

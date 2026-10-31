@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  nyaysahayak:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nyaysahayak_app
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=NyaySahayak - Department of Justice Virtual Assistant
+      - SECRET_KEY=doj-nyaysahayak-super-secret-jwt-key-2026
+      - LLM_PROVIDER=AUTO
+      - GEMINI_API_KEY=
+      - OPENAI_API_KEY=
+      - DATABASE_URL=sqlite:///./nyaysahayak.db
+      - ADMIN_USERNAME=admin@doj.gov.in
+      - ADMIN_PASSWORD=NyayAdmin@2026
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=
+      - SMTP_PASSWORD=
+    volumes:
+      - nyay_data:/app/backend/uploads
+    restart: unless-stopped
+
+volumes:
+  nyay_data:
